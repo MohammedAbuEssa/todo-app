@@ -1,0 +1,69 @@
+$background:#fff;
+*{
+    margin: 0;
+}
+.main {
+    display:flex;
+    margin-top: 8vh;
+    justify-content: space-around;
+}
+header{
+    color: $background;
+    padding: 15px;
+     display: grid;
+     place-content: center;
+}
+.list{
+    height: 70vh;
+    position: relative;
+    border: 2px ;
+    text-align: center;
+    width:70% ;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+    overflow: hidden;
+    .pagination{
+        position: absolute;
+        bottom: 0;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        text-align: center;
+
+    }
+    .listItem{
+
+    }
+}
+form{
+    display: flex;
+    flex-direction: column;
+    border: 2px  ;
+    gap: 10px;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+    padding: 1.7rem;
+    font-size: 1.3rem;
+    label{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        input{
+            margin-top: 7px;
+            height: 22px;
+        }
+        button{
+            font-weight: 600;
+            font-size: 1.2rem;
+            padding: 10px;
+            background-color: darken($background, 15);
+            width: 60%;
+            align-self: center;
+            border: 1px ;
+            &:hover{
+                cursor: pointer;
+                background-color:darken($background, 20);
+            }
+
+        }
+        
+
+    }
+}

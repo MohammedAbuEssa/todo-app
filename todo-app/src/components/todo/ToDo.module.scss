@@ -1,0 +1,37 @@
+// ToDo.module.scss
+
+.custom-range-input {
+    width: 100%;
+    background-color: #e0e0e0; // Set the background color of the track
+    height: 20px; // Set the height of the track
+    border-radius: 10px; // Round the track corners
+    cursor: pointer; // Show a pointer cursor on hover
+  
+    &::-webkit-slider-thumb {
+      width: 20px; // Set the width of the thumb
+      height: 20px; // Set the height of the thumb
+      background-color: #007bff; // Set the thumb color for Webkit browsers
+      border: none; // Remove the thumb border
+      border-radius: 50%; // Make the thumb round
+      cursor: pointer; // Show a pointer cursor on hover
+    }
+  
+    &::-moz-range-thumb {
+      width: 20px; // Set the width of the thumb
+      height: 20px; // Set the height of the thumb
+      background-color: #007bff; // Set the thumb color for Firefox
+      border: none; // Remove the thumb border
+      border-radius: 50%; // Make the thumb round
+      cursor: pointer; // Show a pointer cursor on hover
+    }
+  
+    &::-ms-thumb {
+      width: 20px; // Set the width of the thumb
+      height: 20px; // Set the height of the thumb
+      background-color: #007bff; // Set the thumb color for Microsoft Edge
+      border: none; // Remove the thumb border
+      border-radius: 50%; // Make the thumb round
+      cursor: pointer; // Show a pointer cursor on hover
+    }
+  }
+  

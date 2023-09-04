@@ -1,12 +1,15 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import useForm from '../../hooks/form.jsx';
-
+import List from '../List/list.jsx';
+import Header from '../Header/index.jsx';
+import { SettingContext } from '../../context/Settings/index.jsx';
 import { v4 as uuid } from 'uuid';
+import './ToDo.module.scss'; 
 
 const ToDo = () => {
-
+  const setting = useContext(SettingContext)
   const [defaultValues] = useState({
-    difficulty: 4,
+    difficulty: setting.difficulty,
   });
   const [list, setList] = useState([]);
   const [incomplete, setIncomplete] = useState([]);
@@ -15,7 +18,7 @@ const ToDo = () => {
   function addItem(item) {
     item.id = uuid();
     item.complete = false;
-    console.log(item);
+    // console.log(item);
     setList([...list, item]);
   }
 
@@ -44,11 +47,9 @@ const ToDo = () => {
   }, [list]);
 
   return (
-    <>
-      <header>
-        <h1>To Do List: {incomplete} items pending</h1>
-      </header>
-
+    <div className='toDo'>
+      <Header incomplete={incomplete}/>
+      <div className='main'>
       <form onSubmit={handleSubmit}>
 
         <h2>Add To Do Item</h2>
@@ -65,25 +66,16 @@ const ToDo = () => {
 
         <label>
           <span>Difficulty</span>
-          <input onChange={handleChange} defaultValue={defaultValues.difficulty} type="range" min={1} max={5} name="difficulty" />
+          <input className="custom-range-input" onChange={handleChange} defaultValue={defaultValues.difficulty} type="range" min={1} max={5} name="difficulty" />
         </label>
 
         <label>
           <button type="submit">Add Item</button>
         </label>
       </form>
-
-      {list.map(item => (
-        <div key={item.id}>
-          <p>{item.text}</p>
-          <p><small>Assigned to: {item.assignee}</small></p>
-          <p><small>Difficulty: {item.difficulty}</small></p>
-          <div onClick={() => toggleComplete(item.id)}>Complete: {item.complete.toString()}</div>
-          <hr />
-        </div>
-      ))}
-
-    </>
+      <List list={list} setting={setting} />
+    </div>
+    </div>
   );
 };
 
