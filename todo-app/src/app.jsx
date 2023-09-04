@@ -1,11 +1,14 @@
 import React from 'react';
-
-// import ToDo from './components/Todo/todo.jsx'
+import './app.scss'
+import ToDo from './components/todo/todo.jsx';
+import Settings from './context/Settings/index.jsx';
 
 export default class App extends React.Component {
   render() {
     return (
-      <ToDo />
+      <Settings>
+        <ToDo />
+      </Settings>
     );
   }
 }
