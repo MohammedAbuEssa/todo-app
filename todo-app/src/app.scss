@@ -1,69 +1,98 @@
-$background:#fff;
-*{
-    margin: 0;
+$background: #fff;
+
+* {
+  margin: 0;
 }
-.main {
-    display:flex;
-    margin-top: 8vh;
-    justify-content: space-around;
-}
-header{
+
+header {
+  position: fixed;
+  top: 18px;
+  right: 1vw;
+
+  a {
     color: $background;
-    padding: 15px;
-     display: grid;
-     place-content: center;
-}
-.list{
-    height: 70vh;
-    position: relative;
-    border: 2px ;
-    text-align: center;
-    width:70% ;
-    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
-    overflow: hidden;
-    .pagination{
-        position: absolute;
-        bottom: 0;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        text-align: center;
-
-    }
-    .listItem{
-
-    }
-}
-form{
-    display: flex;
-    flex-direction: column;
-    border: 2px  ;
-    gap: 10px;
-    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
-    padding: 1.7rem;
+    padding: 0.3rem;
     font-size: 1.3rem;
-    label{
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        input{
-            margin-top: 7px;
-            height: 22px;
-        }
-        button{
-            font-weight: 600;
-            font-size: 1.2rem;
-            padding: 10px;
-            background-color: darken($background, 15);
-            width: 60%;
-            align-self: center;
-            border: 1px ;
-            &:hover{
-                cursor: pointer;
-                background-color:darken($background, 20);
-            }
+  }
+}
 
-        }
-        
+.secHeader {
+  background: darken($background, 90);
+  color: $background;
+  padding: 15px;
+}
 
-    }
+.main,
+.settings {
+  display: flex;
+  margin-top: 8vh;
+  justify-content: space-around;
+}
+
+.list {
+  height: 70vh;
+  position: relative;
+  border: 2px solid;
+  text-align: center;
+  width: 70vw;
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3); // Add the shadow color (e.g., rgba(0, 0, 0, 0.3))
+  overflow: hidden;
+
+  .pagination {
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+  }
+}
+
+form,
+.settingsForm {
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+  border: 2px solid gray;
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3); // Add the shadow color
+  padding: 2rem;
+  font-size: 1.3rem;
+
+  label {
+    margin: 0.5rem 0;
+  }
+
+  input {
+    margin-top: 7px;
+    height: 22px;
+  }
+
+  button {
+    margin-top: 1.4rem;
+  }
+
+  h2 {
+    margin-bottom: 1.5rem;
+  }
+}
+
+.settingsResults {
+  height: 70vh;
+  border: 2px solid;
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3); // Add the shadow color
+  display: grid;
+  place-content: center;
+  width: 70vw;
+  overflow: hidden;
+  position: relative;
+
+  h2 {
+    position: absolute;
+    top: 1rem;
+    left: 50%;
+    transform: translate(-50%);
+  }
+
+  p {
+    padding: 0.3rem;
+  }
 }

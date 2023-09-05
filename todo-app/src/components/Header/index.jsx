@@ -1,12 +1,11 @@
 import React from 'react'
-import { Container } from '@mantine/core'; 
+import { AiFillHome,AiFillSetting } from 'react-icons/ai';
 
-export default function header({incomplete}) {
-  return (<>
-<Container style={{ backgroundColor: '#1C7ED6' ,maxWidth: '100%' }}>
+export default function header() {
+  return (
     <header>
-    <h1>To Do List: {incomplete} items pending</h1>
+    <a href='/'><AiFillHome/></a>
+    <a href='/setting'><AiFillSetting/></a>
     </header>
-    </Container></>
   )
 }
