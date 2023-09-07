@@ -1,0 +1,37 @@
+{
+    "users": [
+      {
+        "id": 1,
+        "username": "abuessa",
+        "password": "123",
+        "role": "admin",
+        "capabilities": [
+          "read",
+          "edit",
+          "delete",
+          "add"
+        ]
+      },
+      {
+        "id": 2,
+        "username": "ahmad",
+        "password": "123",
+        "role": "user",
+        "capabilities": ["read","edit"]
+      }
+    ],
+    "todo": [
+      {
+        "difficulty": 3,
+        "text": "milk",
+        "id": 1,
+        "complete": false
+      },
+      {
+        "difficulty": 3,
+        "text": "sugar",
+        "id": 2,
+        "complete": false
+      }
+    ]
+  }
