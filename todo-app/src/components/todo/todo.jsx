@@ -1,65 +1,87 @@
 import React, { useContext, useEffect, useState } from 'react';
-import FormControl from '@mui/material/FormControl';
-import FormGroup from '@mui/material/FormGroup';
-import FormControlLabel from '@mui/material/FormControlLabel';
-import Switch from '@mui/material/Switch';
+import useForm from '../../hooks/form.jsx';
+import List from '../List/list.jsx';
+import Header from '../Header/index.jsx';
 import Button from '@mui/material/Button';
-import {SettingContext} from '../../context/Settings/index.jsx';
+import { SettingContext } from '../../context/Settings/index.jsx';
 
-export default function settingsForm() {
-    const [showupdated,setShowupdated] = useState(false)
-    const settings = useContext(SettingContext)
-    const handleChange= (e)=>{
-        settings.setHideCompleted(e.target.checked)
-        setShowupdated(false)
+const ToDo = () => {
+  const setting = useContext(SettingContext)
+  const [defaultValues] = useState({
+    difficulty: 3,
+    // id:uuid()
+  });
+  const [myList, setMyList] = useState([]);
+  const [incomplete, setIncomplete] = useState([]);
+  const { handleChange, handleSubmit } = useForm(addItem, defaultValues);
+  
+  function addItem(item) {
+    item.id = myList.length+1;
+    item.complete = false;
+    const arr =[...myList]
+    arr.push(item)
+    setMyList(arr);
+    // console.log(item);
+    console.log(item.id)
+    console.log(myList)
+    console.log(arr)
+  }
+
+  function deleteItem(id) {
+    const items = myList.filter( item => item.id !== id );
+    setMyList(items);
+  }
+
+
+
+  useEffect(() => {
+    let incompleteCount = myList.filter(item => !item.complete).length;
+    setIncomplete(incompleteCount);
+    document.title = `To Do List: ${incomplete}`;
+  }, [myList]);
+  useEffect(()=>{
+    const LSstate = localStorage.getItem("state")
+    const LSstateInt = JSON.parse(LSstate)
+    if(LSstateInt){
+            setting.setDisplay(LSstateInt.display)
+            setting.setHideCompleted(LSstateInt.hideCompleted)
+            setting.setSort(LSstateInt.sort)
     }
-    const itemsHandle= (e)=>{
-        settings.setDisplay(e.target.value)
-        setShowupdated(false)
-    }
-    const sortHandle= (e)=>{
-        settings.setSort(e.target.value)
-        setShowupdated(false)
-    }
-   
-    useEffect(()=>{
-            console.log('heelo');
-            let toSave = JSON.stringify(settings)
-            localStorage.setItem("state", toSave);
-    },[settings])
+},[])
   return (
-    <>
-    <div className='secHeader'>
-        <h1>Manage Settings</h1>
+    <div className='toDo'>
+      <div className='secHeader'>
+    <h1>To Do List: {incomplete} items pending</h1>
     </div>
-    <div className='settings'>
-        <div className='settingsForm'>
-        <h2>Change Settings</h2>
-         <FormControl>
-            <FormGroup>
-                <FormControlLabel
-                control={
-                    <Switch checked={settings.hideCompleted} onChange={handleChange} name="" />
-                }
-                label="hide completed"
-            />
-            <label>Item Per page</label>
-            <input type="number" name="items" onChange={itemsHandle}/>
-            <label>Sort Keywords</label>
-            <input type="text" name="sort" onChange={sortHandle}/>
-            <Button onClick={()=>{setShowupdated(true)}} variant="contained">Show New Settings</Button>
-            </FormGroup>
-            </FormControl>
-            </div>
-            <div>
-            {showupdated&&<div className='settingsResults'>
-                <h2>Updated Settings</h2>
-                <p>Hide Completed: {settings.hideCompleted?'True':'False'}</p>
-                <p>Items Per Page: {settings.display}</p>
-                <p>Sort Keyword: {settings.sort}</p>
-            </div>}
-            </div>
+      {/* <Header incomplete={incomplete}/> */}
+      <div className='main'>
+      <form onSubmit={handleSubmit}>
+
+        <h2>Add To Do Item</h2>
+
+        <label>
+          <span>To Do Item</span>
+          <input onChange={handleChange} name="text" type="text" placeholder="Item Details" />
+        </label>
+
+        <label>
+          <span>Assigned To</span>
+          <input onChange={handleChange} name="assignee" type="text" placeholder="Assignee Name" />
+        </label>
+
+        <label>
+          <span>Difficulty</span>
+          <input onChange={handleChange} defaultValue={3} type="range" min={1} max={5} name="difficulty" />
+        </label>
+
+        <label>
+          <Button type='submit' variant="contained">Add Item</Button>
+        </label>
+      </form>
+      <List list={myList} setting={setting} setList={setMyList} />
     </div>
-    </>
-  )
-}
+    </div>
+  );
+};
+
+export default ToDo;
